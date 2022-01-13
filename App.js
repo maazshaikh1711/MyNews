@@ -3,6 +3,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, LogBox} from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
+// import {API_KEY} from 'react-native-dotenv';
 
 LogBox.ignoreLogs(["Animated"]);
 
@@ -20,6 +21,7 @@ class Card extends React.Component {
           <Text style={styles.title}>Lost puppy, if found please return kjbdzvksjsdzbvkjnv</Text>
         </View>
         <View style={{margin: '5%'}}>
+          {/* <Text>{API_KEY}</Text> */}
           <Text style={styles.text}>Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx , Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx </Text>
         </View>
       </View>
@@ -65,7 +67,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       cards: cards,
-      outOfCards: false
+      outOfCards: false,
+      articles : [],
     }
   }
  
@@ -93,11 +96,48 @@ export default class App extends React.Component {
           outOfCards: true
         })
       }
- 
     }
- 
   }
  
+componentDidMount(){
+  async function fetchNewsJSON() {
+    const response = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=54c4f5a2d447483b9a390b1ac9b436b6');
+    const news = await response.json();
+    return news;
+  }
+
+  fetchNewsJSON().then(newsJsonObject => {
+    // fetched news
+    // console.log(news);
+    
+    if(newsJsonObject.status == "ok"){
+
+      this.setState({articles: newsJsonObject.articles})
+      //Displaying authors
+      for (let article of this.state.articles)
+      {
+        if(article.author == null){
+          article.author = "Unknown author";
+        }
+        console.log(article.author);
+      }
+
+      //Displaying Title
+      for (let article of this.state.articles)
+      {
+        if(article.title == null){
+          article.title = "No Title Available";
+        }
+        console.log(article.title);
+      }
+
+    }
+    else{
+      console.log("Something went wrong in accessing articles");
+    }
+  });
+}
+
   render() {
     return (
       <View style={{flex:1, justifyContent: 'center', alignItems: 'center',backgroundColor:"#192734"}}>
@@ -139,7 +179,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     fontSize: 25,
     fontWeight: 'bold',
-    fontColor: '#0000',
   },
   thumbnail: {
     width: 300,
