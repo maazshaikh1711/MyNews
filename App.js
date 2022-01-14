@@ -1,9 +1,12 @@
 'use strict';
  
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, LogBox} from 'react-native';
 import CardNews from './src/CardNews';
-const headLinesURL = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=';
+
+LogBox.ignoreLogs(["Animated"]);
+LogBox.ignoreLogs(["ComponentWillReceiveProps has been"]);
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <CardNews url={headLinesURL} />
+      <CardNews/>
     )
   }
 }
