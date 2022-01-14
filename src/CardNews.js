@@ -44,7 +44,7 @@ export default class CardNews extends React.Component {
   componentDidMount() {
     async function fetchNewsJSON() {
         // console.log(this.props.url);
-        const response = await fetch(`${this.props.url}${NEWS_API_KEY}`);
+        const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`);
         const news = await response.json();
         return news;
     }
