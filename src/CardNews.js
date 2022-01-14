@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, LogBox} from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import Card from './Card';
 import NoMoreCards from './NoMoreCards';
-import {FetchNews} from './commonFunctions/FetchNews';
+import {FetchNews} from './common/FetchNews';
 
 LogBox.ignoreLogs(["Animated"]);
 LogBox.ignoreLogs(["ComponentWillReceiveProps has been"]);
@@ -47,8 +47,7 @@ export default class CardNews extends React.Component {
       if(newsJsonObject.status == "ok"){
   
         this.setState({articles: newsJsonObject.articles})
-  
-        
+        /*
         //Displaying authors
         for (let article of this.state.articles)
         {
@@ -66,7 +65,7 @@ export default class CardNews extends React.Component {
           }
           console.log(article.title);
         }
-        
+        */
       }
       else{
         console.log("Something went wrong in accessing articles");
