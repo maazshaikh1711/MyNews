@@ -3,9 +3,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, LogBox} from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
-// import {API_KEY} from 'react-native-dotenv';
+import {NEWS_API_KEY} from '@env';
 
 LogBox.ignoreLogs(["Animated"]);
+LogBox.ignoreLogs(["ComponentWillReceiveProps has been"]);
 
 class Card extends React.Component {
   constructor(props) {
@@ -15,14 +16,14 @@ class Card extends React.Component {
   render() {
     return (
       <View style={styles.card}>
-        <Image style={styles.thumbnail} source={{uri: this.props.image}} />
+        <Image style={styles.thumbnail} source={{uri: this.props.urlToImage}} />
         {/* <Text style={styles.text}>This is card {this.props.name}</Text> */}
         <View style={{height: 70, paddingTop: 5}}>
-          <Text style={styles.title}>Lost puppy, if found please return kjbdzvksjsdzbvkjnv</Text>
+          <Text style={styles.title}>{this.props.title}</Text>
         </View>
         <View style={{margin: '5%'}}>
           {/* <Text>{API_KEY}</Text> */}
-          <Text style={styles.text}>Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx , Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx Lost puppy, if found please return kjbdzvk sjsdzbv kjnv gyihrfsjldk irufsvnj mrisgfbvkj cnriusfbkjvcx </Text>
+          <Text style={styles.text}>{this.props.description}</Text>
         </View>
       </View>
     )
@@ -83,16 +84,16 @@ export default class App extends React.Component {
   cardRemoved (index) {
     console.log(`The index is ${index}`);
  
-    let CARD_REFRESH_LIMIT = 3
+    let CARD_REFRESH_LIMIT = 3;
  
-    if (this.state.cards.length - index <= CARD_REFRESH_LIMIT + 1) {
-      console.log(`There are only ${this.state.cards.length - index - 1} cards left.`);
+    if (this.state.articles.length - index <= CARD_REFRESH_LIMIT + 1) {
+      console.log(`There are only ${this.state.articles.length - index - 1} cards left.`);
  
       if (!this.state.outOfCards) {
-        console.log(`Adding ${cards2.length} more cards`)
+        // console.log(`Adding ${cards2.length} more cards`)
  
         this.setState({
-          cards: this.state.cards.concat(cards2),
+          // cards: this.state.cards.concat(cards2),
           outOfCards: true
         })
       }
@@ -101,7 +102,8 @@ export default class App extends React.Component {
  
 componentDidMount(){
   async function fetchNewsJSON() {
-    const response = await fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=54c4f5a2d447483b9a390b1ac9b436b6');
+    //console.log(REACT_APP_API_KEY);
+    const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`);
     const news = await response.json();
     return news;
   }
@@ -143,7 +145,7 @@ componentDidMount(){
       <View style={{flex:1, justifyContent: 'center', alignItems: 'center',backgroundColor:"#192734"}}>
       
         <SwipeCards
-          cards={this.state.cards}
+          cards={this.state.articles}
           loop={false}
   
           renderCard={(cardData) => <Card {...cardData} />}
