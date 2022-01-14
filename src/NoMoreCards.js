@@ -2,18 +2,14 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 
-export default class NoMoreCards extends React.Component {
-    constructor(props) {
-      super(props);
-    }
+const NoMoreCards = () => {
    
-    render() {
-      return (
-        <View style={styles.noMoreCards}>
-          <Text>No more cards</Text>
-        </View>
-      )
-    }
+  return (
+    <View style={styles.noMoreCards}>
+      <Text>No more cards</Text>
+    </View>
+  )
+  
 }
 
 const styles = StyleSheet.create({
@@ -23,3 +19,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
 })
+
+export default NoMoreCards;

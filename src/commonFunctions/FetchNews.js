@@ -8,9 +8,7 @@ export const FetchNews =  async() => {
         const news = await response.json();
         return news;
     }
-    catch{ (err) =>{
+    catch{ (err) =>
         console.error(`Some error occured: ${err.message}`);
-    }
-
     }
 }
