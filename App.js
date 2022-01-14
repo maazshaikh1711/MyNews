@@ -16,20 +16,22 @@ class Card extends React.Component {
   render() {
     return (
       <View style={styles.card}>
+
         <Image style={styles.thumbnail} source={{uri: this.props.urlToImage}} />
-        {/* <Text style={styles.text}>This is card {this.props.name}</Text> */}
+        
         <View style={{height: 70, paddingTop: 5}}>
           <Text style={styles.title}>{this.props.title}</Text>
         </View>
+        
         <View style={{margin: '5%'}}>
-          {/* <Text>{API_KEY}</Text> */}
           <Text style={styles.text}>{this.props.description}</Text>
         </View>
+
       </View>
     )
   }
 }
- 
+
 class NoMoreCards extends React.Component {
   constructor(props) {
     super(props);
@@ -43,31 +45,11 @@ class NoMoreCards extends React.Component {
     )
   }
 }
- 
-const cards = [
-  {name: '1', image: 'https://media.giphy.com/media/GfXFVHUzjlbOg/giphy.gif'},
-  {name: '2', image: 'https://media.giphy.com/media/irTuv1L1T34TC/giphy.gif'},
-  {name: '3', image: 'https://media.giphy.com/media/LkLL0HJerdXMI/giphy.gif'},
-  {name: '4', image: 'https://media.giphy.com/media/fFBmUMzFL5zRS/giphy.gif'},
-  {name: '5', image: 'https://media.giphy.com/media/oDLDbBgf0dkis/giphy.gif'},
-  {name: '6', image: 'https://media.giphy.com/media/7r4g8V2UkBUcw/giphy.gif'},
-  {name: '7', image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.gif'},
-  {name: '8', image: 'https://media.giphy.com/media/hEwST9KM0UGti/giphy.gif'},
-  {name: '9', image: 'https://media.giphy.com/media/3oEduJbDtIuA2VrtS0/giphy.gif'},
-]
- 
-const cards2 = [
-  {name: '10', image: 'https://media.giphy.com/media/12b3E4U9aSndxC/giphy.gif'},
-  {name: '11', image: 'https://media4.giphy.com/media/6csVEPEmHWhWg/200.gif'},
-  {name: '12', image: 'https://media4.giphy.com/media/AA69fOAMCPa4o/200.gif'},
-  {name: '13', image: 'https://media.giphy.com/media/OVHFny0I7njuU/giphy.gif'},
-]
- 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: cards,
       outOfCards: false,
       articles : [],
     }
@@ -90,10 +72,7 @@ export default class App extends React.Component {
       console.log(`There are only ${this.state.articles.length - index - 1} cards left.`);
  
       if (!this.state.outOfCards) {
-        // console.log(`Adding ${cards2.length} more cards`)
- 
         this.setState({
-          // cards: this.state.cards.concat(cards2),
           outOfCards: true
         })
       }
@@ -102,7 +81,6 @@ export default class App extends React.Component {
  
 componentDidMount(){
   async function fetchNewsJSON() {
-    //console.log(REACT_APP_API_KEY);
     const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`);
     const news = await response.json();
     return news;
@@ -115,6 +93,8 @@ componentDidMount(){
     if(newsJsonObject.status == "ok"){
 
       this.setState({articles: newsJsonObject.articles})
+
+      /*
       //Displaying authors
       for (let article of this.state.articles)
       {
@@ -132,12 +112,13 @@ componentDidMount(){
         }
         console.log(article.title);
       }
-
+      */
     }
     else{
       console.log("Something went wrong in accessing articles");
     }
-  });
+  })
+  .catch((err)=> console.log(`Error: ${err.message}`));
 }
 
   render() {
@@ -176,8 +157,6 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    // flex: 1, 
-    // flexWrap: 'wrap',
     justifyContent: 'flex-start',
     fontSize: 25,
     fontWeight: 'bold',
@@ -189,7 +168,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    // paddingTop: 10px,
   },
   noMoreCards: {
     flex: 1,
