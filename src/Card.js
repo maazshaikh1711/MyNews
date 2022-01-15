@@ -9,7 +9,7 @@ export const Card = ({props}) => {
       return (
         <>
         <View>
-          {openArticleModal && <ShowArticleModal onClose={()=>{setOpenArticalModal(false)}}/>
+          {openArticleModal && <ShowArticleModal onClose={()=>{setOpenArticalModal(false)}} article = {props}/>
           }
         </View>
           <TouchableOpacity style={{ alignItems: 'center' , justifyContent: 'center' }} onPress={()=> 
