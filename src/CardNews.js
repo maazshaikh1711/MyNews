@@ -44,34 +44,37 @@ export default class CardNews extends React.Component {
     
     const newsJsonObject = await FetchNews();
       
-      if(newsJsonObject.status == "ok"){
-  
-        this.setState({articles: newsJsonObject.articles})
-        /*
-        //Displaying authors
-        for (let article of this.state.articles)
-        {
-          if(article.author == null){
-            article.author = "Unknown author";
+      if(newsJsonObject?.status){
+        if (newsJsonObject.status == "ok"){
+    
+          this.setState({articles: newsJsonObject.articles})
+          /*
+          //Displaying authors
+          for (let article of this.state.articles)
+          {
+            if(article.author == null){
+              article.author = "Unknown author";
+            }
+            console.log(article.author);
           }
-          console.log(article.author);
-        }
-  
-        //Displaying Title
-        for (let article of this.state.articles)
-        {
-          if(article.title == null){
-            article.title = "No Title Available";
+    
+          //Displaying Title
+          for (let article of this.state.articles)
+          {
+            if(article.title == null){
+              article.title = "No Title Available";
+            }
+            console.log(article.title);
           }
-          console.log(article.title);
+          */
         }
-        */
+        else{
+          console.log("Something went wrong in accessing the articles, (returned object from api, but it's status is not 'ok') ");
+        }
       }
       else{
-        console.log("Something went wrong in accessing articles");
+        console.log("Something went wrong in accessing articles, (returned object from api does not have status field) ");
       }
-    // })
-  //   .catch((err)=> console.log(`Error: ${err.message}`));
   }
   
     render() {
