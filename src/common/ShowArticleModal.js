@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Modal, TouchableOpacity, Dimensions} from 'react
 const {height, width} =Dimensions.get("window");
 
 const ShowArticleModal = (props) => {
-  const {onClose} = props
+  const {onClose, article} = props
   const [modalVisible, setModalVisible] = useState(true);
 
     return (
@@ -19,7 +19,7 @@ const ShowArticleModal = (props) => {
       >
         <View style={styles.modalContainer}>
             <View style={styles.modalView} onClose={onClose}>
-              <Text style={styles.modalText}>Hello World!</Text>
+              <Text style={styles.modalText}>{article.title}</Text>
               <TouchableOpacity style={styles.button}
                 onPress={() => setModalVisible(false)}
                 onPress = {onClose}
