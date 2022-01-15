@@ -82,7 +82,7 @@ export default class CardNews extends React.Component {
             cards={this.state.articles}
             loop={false}
     
-            renderCard={(cardData) => <Card {...cardData} />}
+            renderCard={(cardData) => <Card props={cardData} />}
             renderNoMoreCards={() => <NoMoreCards />}
             showYup={true}
             showNope={true}
