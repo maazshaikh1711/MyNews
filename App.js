@@ -6,7 +6,7 @@ import {Header} from './src/common/components/Header';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import ForYouNews from './src/ForYouNewsPage/ForYouNews';
 import AllNews from './src/AllNewsPage/AllNews';
 
@@ -27,7 +27,7 @@ export const Tabbars = () => {
           }
           
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Icon name={iconName} size={size} color={color} />;
         },
       })}
 
