@@ -1,10 +1,9 @@
 import {NEWS_API_KEY} from '@env';
-import {HEADLINES_URL} from '@env';
 
-export const FetchNews =  async() => {
+export const FetchNews =  async(props) => {
 
     try{
-        const response = await fetch(`${HEADLINES_URL}${NEWS_API_KEY}`);
+        const response = await fetch(props+NEWS_API_KEY);
         const news = await response.json();
         return news;
     }
