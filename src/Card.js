@@ -4,35 +4,44 @@ import ShowArticleModal from './common/ShowArticleModal';
 
 export const Card = ({props}) => {
 
-   const [openArticleModal, setOpenArticalModal]= useState(false)
+  const [openArticleModal, setOpenArticalModal]= useState(false);
+  const [showCard, setShowCard] = useState(true);
 
       return (
         <>
-        <View>
-          {openArticleModal && <ShowArticleModal onClose={()=>{setOpenArticalModal(false)}} article = {props}/>
+          {
+          openArticleModal && <ShowArticleModal onClose={()=>{setOpenArticalModal(false), setShowCard(true)}} 
+                                                // showCard={()=>{setShowCard(true)}}
+                                                article = {props} 
+                              />
           }
-        </View>
-          <TouchableOpacity style={{ alignItems: 'center' , justifyContent: 'center' }} onPress={()=> 
-            setOpenArticalModal(true)
-          // <ShowArticleModal visible={true}/> 
-              // {1==1 && <ShowArticleModal visible={true}/>}
-              // Alert.alert("Tapped on a card")
-          }>
-            <View style={styles.card}>
-      
-              <Image style={styles.thumbnail} source={{uri: props.urlToImage}} />
-              
-              <View style={{height: 70, paddingTop: 5}}>
-                <Text style={styles.title}>{props.title}</Text>
-              </View>
-              
-              <View style={{margin: '5%'}}>
-                <Text style={styles.text}>{props.description}</Text>
-              </View>
-      
-            </View>
-          </TouchableOpacity>
-          </>
+
+        <View>
+          {
+            (showCard === true) ?
+              <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={()=> {
+                setShowCard(false)
+                setOpenArticalModal(true)
+              }}>
+                <View style={styles.card}>
+          
+                  <Image style={styles.thumbnail} source={{uri: props.urlToImage}} />
+                  
+                  <View style={{height: 70, paddingTop: 5}}>
+                    <Text style={styles.title}>{props.title}</Text>
+                  </View>
+                  
+                  <View style={{margin: '5%'}}>
+                    <Text style={styles.text}>{props.description}</Text>
+                  </View>
+          
+                </View>
+              </TouchableOpacity>
+              :
+              null
+          }
+          </View>
+        </>
       )
 }
 
