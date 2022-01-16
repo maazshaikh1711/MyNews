@@ -7,11 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ForYouNews from './src/ForYouNewsPage/ForYouNews';
+import IndiaNews from './src/IndiaNewsPage/IndiaNews';
 import AllNews from './src/AllNewsPage/AllNews';
 
 LogBox.ignoreLogs(["Animated"]);
-LogBox.ignoreLogs(["ComponentWillReceiveProps has been"]);
+LogBox.ignoreLogs(["componentWillReceiveProps has been"]);
+LogBox.ignoreLogs(["Bottom Tab Navigator"]);
 
 export const Tabbars = () => {
   return (
@@ -20,7 +21,7 @@ export const Tabbars = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'For You') {
+          if (route.name === 'India News') {
             iconName = focused ? 'md-home-sharp' : 'md-home-outline';
           } else if (route.name === 'All News') {
             iconName = focused? 'stats-chart' : 'stats-chart-outline';
@@ -42,7 +43,7 @@ export const Tabbars = () => {
         inactiveBackgroundColor: '#1465e3',
         showLabel: true,
       }}>
-      <Tab.Screen name="For You" component={ForYouNews} />
+      <Tab.Screen name="India News" component={IndiaNews} />
       <Tab.Screen name="All News" component={AllNews} />
 
     </Tab.Navigator>
