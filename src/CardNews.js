@@ -41,13 +41,15 @@ export default class CardNews extends React.Component {
     }
    
   componentDidMount = async() => {
-    
-    const newsJsonObject = await FetchNews();
+
+    // console.log(this.props.URL+"..................................................")
+    const newsJsonObject = await FetchNews(this.props.URL);
       
       if(newsJsonObject?.status){
         if (newsJsonObject.status == "ok"){
     
           this.setState({articles: newsJsonObject.articles})
+          // console.log(newsJsonObject.articles[0])
           /*
           //Displaying authors
           for (let article of this.state.articles)
